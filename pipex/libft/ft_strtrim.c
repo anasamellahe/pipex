@@ -18,6 +18,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		j;
 	int		t;
 	int		arr[256];
+	char *str;
 
 	if (!s1)
 		return (NULL);
@@ -36,5 +37,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 			+ arr[(int)((unsigned char)s1[i])];
 		i++;
 	}
-	return (ft_substr(s1, j, i - (j + t)));
+	str = ft_substr(s1, j, i - (j + t));
+	return (str);
 }

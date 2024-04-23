@@ -7,10 +7,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <fcntl.h>
+#include <errno.h>
 
 typedef struct s_file
 {
-	char *file_name;
-	char *cmd;
+	int		fd;
+	char	*file_name;
+	char	*cmd;
+	char	**param;
 } t_file;
 #endif
