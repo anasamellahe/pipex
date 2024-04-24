@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anamella <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anamella <anamella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:47:35 by anamella          #+#    #+#             */
-/*   Updated: 2023/11/19 01:13:29 by anamella         ###   ########.fr       */
+/*   Updated: 2024/04/24 01:26:59 by anamella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		j;
 	int		t;
 	int		arr[256];
-	char *str;
+	char	*str;
 
 	if (!s1)
 		return (NULL);
