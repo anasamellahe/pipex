@@ -6,7 +6,7 @@
 /*   By: anamella <anamella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 01:24:56 by anamella          #+#    #+#             */
-/*   Updated: 2024/04/26 06:33:32 by anamella         ###   ########.fr       */
+/*   Updated: 2024/04/26 23:31:18 by anamella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	set_t_file(t_file *cmd1, t_file *cmd2, char **av, char **env)
 
 void	child_proccess1(t_file *cmd1, t_file *cmd2, int *fd)
 {
-
 	cmd1->pid = fork();
 	if (cmd1->pid < 0)
 	{
@@ -53,7 +52,6 @@ void	child_proccess1(t_file *cmd1, t_file *cmd2, int *fd)
 
 void	child_proccess2(t_file *cmd1, t_file *cmd2, int *fd)
 {
-	
 	cmd2->pid = fork();
 	if (cmd2->pid < 0)
 	{
@@ -63,7 +61,7 @@ void	child_proccess2(t_file *cmd1, t_file *cmd2, int *fd)
 	if (cmd2->pid == 0 && cmd2->cmd_f == 1)
 	{
 		free_fun(cmd1, cmd2);
-		exit(0);
+		exit(126);
 	}
 	if (cmd2->pid == 0)
 	{
@@ -79,13 +77,7 @@ void	child_proccess2(t_file *cmd1, t_file *cmd2, int *fd)
 		}
 	}
 }
-void print_error(char *message, char *path, int path_flag)
-{
-	write(2, message, ft_strlen(message));
-	if (path_flag == 1)
-		write(2, path, ft_strlen(path));
-	write(2, "\n", 1);
-}
+
 void	pipex(t_file *cmd1, t_file *cmd2)
 {
 	int	fd[2];
@@ -103,24 +95,11 @@ void	pipex(t_file *cmd1, t_file *cmd2)
 	get_exit_status(cmd1, cmd2);
 }
 
-void	get_exit_status(t_file *cmd1, t_file *cmd2)
-{
-	int	status1;
-	int	status2;
-	int test;
-
-	waitpid(cmd1->pid, &status1, 0);
-	waitpid(cmd2->pid, &status2, 0);
-	if (WIFEXITED(status1))
-		cmd1->exit_status = WEXITSTATUS(status1);
-	if (WIFEXITED(status2))
-		cmd2->exit_status = WEXITSTATUS(status2);
-}
-
 int	main(int ac, char *av[], char *env[])
 {
 	t_file	*cmd1;
 	t_file	*cmd2;
+	int		exit_status;
 
 	if (ac < 5)
 	{
@@ -132,6 +111,8 @@ int	main(int ac, char *av[], char *env[])
 	set_t_file(cmd1, cmd2, av, env);
 	get_fd(cmd1, cmd2);
 	pipex(cmd1, cmd2);
+	exit_status = cmd2->exit_status;
 	free_fun(cmd1, cmd2);
+	exit(exit_status);
 	return (0);
 }

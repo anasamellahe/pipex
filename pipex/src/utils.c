@@ -6,7 +6,7 @@
 /*   By: anamella <anamella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 01:25:58 by anamella          #+#    #+#             */
-/*   Updated: 2024/04/26 01:51:31 by anamella         ###   ########.fr       */
+/*   Updated: 2024/04/26 23:29:25 by anamella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*get_valid_path(char **path, char *cmd_n, t_file *cmd)
 	{
 		cmd->cmd_f = 1;
 		write(2, "Permission denied\n", 18);
-		exit(126);
+		return (0);
 	}
 	if (access(cmd_n, F_OK | X_OK) == 0)
 		return (cmd_n);

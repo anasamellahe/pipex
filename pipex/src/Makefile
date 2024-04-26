@@ -18,10 +18,9 @@ CFLAGS = -Wall -Wextra -Werror
 CC = cc
 
 all : $(NAME)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-      
-$(NAME) : $(OBJ)
 
+$(NAME) : $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 clean :
 	rm -f $(OBJ)
 
@@ -30,5 +29,6 @@ fclean : clean
 
 re : fclean all
 
-.c.o :
+$(OBJ) : %.o : %.c
 	$(CC) $(CFLAGS) -c $<
+.SECONDARY: $(OBJ)
