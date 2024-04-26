@@ -6,11 +6,11 @@
 /*   By: anamella <anamella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 02:47:31 by anamella          #+#    #+#             */
-/*   Updated: 2024/04/26 00:52:06 by anamella         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:52:15 by anamella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libtf.h"
+#include "pipex.h"
 
 static char	**ft_count(char const *s, char c)
 {

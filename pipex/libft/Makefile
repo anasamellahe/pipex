@@ -34,7 +34,7 @@ SRC = 	ft_atoi.c\
 		ft_tolower.c\
 		ft_toupper.c\
 
-SRC_B = ft_lstsize_bonus.c\
+SRC_B =	ft_lstsize_bonus.c\
 		ft_lstnew_bonus.c \
 		ft_lstmap_bonus.c\
 		ft_lstlast_bonus.c\
@@ -63,3 +63,5 @@ re: fclean all
 	@$(CC) $(CFLAGS) -c $<
 	@$(AR) $(NAME) $@
 bonus: $(OBJ_B)
+
+.SECONDARY $(OBJ)

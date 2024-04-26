@@ -6,7 +6,7 @@
 /*   By: anamella <anamella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 01:25:58 by anamella          #+#    #+#             */
-/*   Updated: 2024/04/24 02:57:25 by anamella         ###   ########.fr       */
+/*   Updated: 2024/04/26 01:51:31 by anamella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	join_path(char **path, char *cmd)
 	}
 }
 
-char	*search_for_path(char **env, char *cmd, char *arg, int *flag)
+char	*search_for_path(char **env, char *cmd_n, t_file *cmd)
 {
 	char	*full_path;
 	char	**path;
@@ -52,12 +52,12 @@ char	*search_for_path(char **env, char *cmd, char *arg, int *flag)
 	full_path = ft_strtrim(get_path(env), "PATH=");
 	path = ft_split(full_path, ':');
 	free(full_path);
-	va_path = ft_strdup(get_valid_path(path, cmd));
-	*flag = 0;
+	va_path = ft_strdup(get_valid_path(path, cmd_n, cmd));
+	cmd->free_flag = 0;
 	if (va_path == NULL)
 	{
-		*flag = 1;
-		va_path = cmd;
+		cmd->free_flag = 1;
+		va_path = cmd_n;
 	}
 	i = 0;
 	while (path[i] != NULL)
@@ -66,18 +66,23 @@ char	*search_for_path(char **env, char *cmd, char *arg, int *flag)
 	return (va_path);
 }
 
-char	*get_valid_path(char **path, char *cmd)
+char	*get_valid_path(char **path, char *cmd_n, t_file *cmd)
 {
 	int	i;
 
 	i = 0;
-	if (!cmd)
+	cmd->cmd_f = 0;
+	if (!cmd_n)
+	{
+		cmd->cmd_f = 1;
 		write(2, "Permission denied\n", 18);
-	if (access(cmd, F_OK | X_OK) == 0)
-		return (cmd);
+		exit(126);
+	}
+	if (access(cmd_n, F_OK | X_OK) == 0)
+		return (cmd_n);
 	else
 	{
-		join_path(path, cmd);
+		join_path(path, cmd_n);
 		while (path[i] != NULL)
 		{
 			if (access(path[i], F_OK | X_OK) == 0)
