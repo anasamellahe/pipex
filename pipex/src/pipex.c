@@ -107,7 +107,11 @@ int	main(int ac, char *av[], char *env[])
 		exit(0);
 	}
 	cmd1 = malloc(sizeof(t_file));
+	if (!cmd1)
+		error_mallco("Error: memory not allocated.\n", NULL, 0);
 	cmd2 = malloc(sizeof(t_file));
+	if (!cmd2)
+		error_mallco("Error: memory not allocated.\n", cmd1, 1);
 	set_t_file(cmd1, cmd2, av, env);
 	get_fd(cmd1, cmd2);
 	pipex(cmd1, cmd2);

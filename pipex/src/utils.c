@@ -17,7 +17,7 @@ char	*get_path(char **env)
 	int	i;
 
 	i = 0;
-	while (ft_strnstr(env[i], "PATH", 4) == NULL)
+	while (ft_strnstr(env[i], "PATH", 4) == NULL && env[i] != NULL)
 		i++;
 	if (env[i] != NULL)
 		return (env[i]);
@@ -50,6 +50,11 @@ char	*search_for_path(char **env, char *cmd_n, t_file *cmd)
 	int		i;
 
 	full_path = ft_strtrim(get_path(env), "PATH=");
+	if (!full_path)
+	{
+		cmd->free_flag = 1;
+		return ((cmd->cmd_f = cmd_n == NULL), cmd_n);
+	}
 	path = ft_split(full_path, ':');
 	free(full_path);
 	va_path = ft_strdup(get_valid_path(path, cmd_n, cmd));

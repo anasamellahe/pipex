@@ -33,11 +33,12 @@ typedef struct s_file
 	char	**param;
 }	t_file;
 
+int		print_error(char *message, char *path, int path_flag);
 char	*search_for_path(char **env, char *cmd_n, t_file *cmd);
 char	*get_valid_path(char **path, char *cmd_n, t_file *cmd);
 char	*get_path(char **env);
 void	set_t_file(t_file *cmd1, t_file *cmd2, char **av, char **env);
-void	print_error(char *message, char *path, int path_flag);
+void	error_mallco(char *message, t_file *cmd, int free_flag);
 void	child_proccess1(t_file *cmd1, t_file *cmd2, int *fd);
 void	child_proccess2(t_file *cmd1, t_file *cmd2, int *fd);
 void	get_exit_status(t_file *cmd1, t_file *cmd2);

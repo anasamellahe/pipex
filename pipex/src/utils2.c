@@ -27,16 +27,20 @@ void	free_cmd(t_file *cmd)
 		free(cmd->param[i++]);
 	free(cmd->param);
 	if (cmd->free_flag == 0)
-		free(cmd->cmd);
+	{
+		if (cmd->cmd != NULL)
+			free(cmd->cmd);
+	}
 	free(cmd);
 }
 
-void	print_error(char *message, char *path, int path_flag)
+int	print_error(char *message, char *path, int path_flag)
 {
 	write(2, message, ft_strlen(message));
 	if (path_flag == 1)
 		write(2, path, ft_strlen(path));
 	write(2, "\n", 1);
+	return (1);
 }
 
 void	get_exit_status(t_file *cmd1, t_file *cmd2)
@@ -50,4 +54,12 @@ void	get_exit_status(t_file *cmd1, t_file *cmd2)
 		cmd1->exit_status = WEXITSTATUS(status1);
 	if (WIFEXITED(status2))
 		cmd2->exit_status = WEXITSTATUS(status2);
+}
+
+void	error_mallco(char *message, t_file *cmd, int free_flag)
+{
+	if (free_flag == 1)
+		free(cmd);
+	write(2, message, ft_strlen(message));
+	exit(1);
 }

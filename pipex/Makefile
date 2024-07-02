@@ -14,7 +14,7 @@ SRC =	src/ft_bzero.c \
 
 OBJ = $(SRC:.c=.o)
 NAME = pipex
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 CC = cc
 
 all : $(NAME)
