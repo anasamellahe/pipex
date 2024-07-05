@@ -39,12 +39,12 @@ char	*get_valid_path(char **path, char *cmd_n, t_file *cmd);
 char	*get_path(char **env);
 void	set_t_file(t_file *cmd1, t_file *cmd2, char **av, char **env);
 void	error_mallco(char *message, t_file *cmd, int free_flag);
-void	child_proccess1(t_file *cmd1, t_file *cmd2, int *fd);
-void	child_proccess2(t_file *cmd1, t_file *cmd2, int *fd);
+void	child_proccess1(t_file *cmd1, t_file *cmd2, int *fd, char **env);
+void	child_proccess2(t_file *cmd1, t_file *cmd2, int *fd, char **env);
 void	get_exit_status(t_file *cmd1, t_file *cmd2);
 void	get_fd(t_file *cmd1, t_file *cmd2);
 void	join_path(char **path, char *cmd);
-void	pipex(t_file *cmd1, t_file *cmd2);
+void	pipex(t_file *cmd1, t_file *cmd2, char **env);
 void	free_fun(t_file *cmd1, t_file *cmd2);
 void	free_cmd(t_file *cmd);
 

@@ -49,12 +49,12 @@ char	*search_for_path(char **env, char *cmd_n, t_file *cmd)
 	char	*va_path;
 	int		i;
 
+	if (ft_strnstr(cmd_n, "/", ft_strlen(cmd_n)) != NULL)
+		if (access(cmd_n, F_OK | X_OK))
+			return ((cmd->cmd_f = cmd_n == NULL), cmd->free_flag = 1, cmd_n);
 	full_path = ft_strtrim(get_path(env), "PATH=");
 	if (!full_path)
-	{
-		cmd->free_flag = 1;
-		return ((cmd->cmd_f = cmd_n == NULL), cmd_n);
-	}
+		return ((cmd->cmd_f = cmd_n == NULL), cmd->free_flag = 1, cmd_n);
 	path = ft_split(full_path, ':');
 	free(full_path);
 	va_path = ft_strdup(get_valid_path(path, cmd_n, cmd));
